@@ -128,7 +128,7 @@ function getPolynom(...args) {
 function memoize(func) {
   let result;
   let isCalled = false;
-  return function () {
+  return function fun() {
     if (!isCalled) {
       if (typeof func === 'function') {
         result = func();
