@@ -126,18 +126,14 @@ function getPolynom(...args) {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-  let result;
-  let isCalled = false;
-  return function fun() {
-    if (!isCalled) {
-      if (typeof func === 'function') {
-        result = func();
-        isCalled = true;
-      }
-    } else {
-      return result;
+  const obj = {};
+  return function fun(...arg) {
+    if (Object.keys(obj).length === 0) {
+      const result = func(...arg);
+      const key = String(result);
+      obj[key] = result;
     }
-    return 0;
+    return obj.key;
   };
 }
 
